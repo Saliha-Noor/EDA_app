@@ -9,6 +9,7 @@ st.set_page_config(
 )
 
 
+
 st.title("Exploratory Data Analysis Interface")
 st.write("Upload a CSV dataset and explore its structure, statistics, and visual patterns.")
 
