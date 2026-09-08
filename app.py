@@ -3,27 +3,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-# --------------------------------------------------
-# PAGE CONFIGURATION
-# --------------------------------------------------
-
 st.set_page_config(
     page_title="Titanic EDA",
     layout="wide"
 )
 
 
-# --------------------------------------------------
-# TITLE
-# --------------------------------------------------
-
 st.title("Exploratory Data Analysis Interface")
 st.write("Upload a CSV dataset and explore its structure, statistics, and visual patterns.")
 
 
-# --------------------------------------------------
-# SIDEBAR
-# --------------------------------------------------
 
 st.sidebar.header("EDA Controls")
 
@@ -33,30 +22,21 @@ uploaded_file = st.sidebar.file_uploader(
 )
 
 
-# --------------------------------------------------
-# CHECK FILE
-# --------------------------------------------------
 
 if uploaded_file is not None:
 
     try:
 
-        # Read CSV file
+    
         df = pd.read_csv(uploaded_file)
 
         st.sidebar.success("CSV file loaded successfully.")
 
-        # --------------------------------------------------
-        # DATASET PREVIEW
-        # --------------------------------------------------
 
         st.header("Dataset Preview")
 
         st.dataframe(df.head())
 
-        # --------------------------------------------------
-        # DATASET DIMENSIONS
-        # --------------------------------------------------
 
         st.header("Dataset Dimensions")
 
@@ -70,10 +50,6 @@ if uploaded_file is not None:
         with col2:
             st.metric("Number of Columns", columns)
 
-        # --------------------------------------------------
-        # DATA TYPES
-        # --------------------------------------------------
-
         st.header("Column Data Types")
 
         dtype_df = pd.DataFrame({
@@ -83,9 +59,7 @@ if uploaded_file is not None:
 
         st.dataframe(dtype_df)
 
-        # --------------------------------------------------
-        # MISSING VALUES
-        # --------------------------------------------------
+   
 
         st.header("Missing Values")
 
@@ -96,9 +70,6 @@ if uploaded_file is not None:
 
         st.dataframe(missing_df)
 
-        # --------------------------------------------------
-        # NUMERICAL STATISTICS
-        # --------------------------------------------------
 
         st.header("Numerical Statistics")
 
@@ -121,9 +92,7 @@ if uploaded_file is not None:
 
             st.write("No numerical attributes found.")
 
-        # --------------------------------------------------
-        # ATTRIBUTE SELECTION
-        # --------------------------------------------------
+   
 
         st.sidebar.header("Attribute Selection")
 
@@ -132,9 +101,6 @@ if uploaded_file is not None:
             df.columns
         )
 
-        # --------------------------------------------------
-        # AUTOMATIC ATTRIBUTE TYPE DETECTION
-        # --------------------------------------------------
 
         if pd.api.types.is_numeric_dtype(df[selected_column]):
 
@@ -149,13 +115,9 @@ if uploaded_file is not None:
         st.write("Column:", selected_column)
         st.write("Attribute Type:", attribute_type)
 
-        # --------------------------------------------------
-        # VISUALIZATION
-        # --------------------------------------------------
 
         st.header("Visualization")
 
-        # Numerical attribute
         if attribute_type == "Numerical":
 
             st.subheader(
@@ -177,7 +139,6 @@ if uploaded_file is not None:
 
             st.pyplot(fig)
 
-        # Categorical attribute
         else:
 
             st.subheader(
